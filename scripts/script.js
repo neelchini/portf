@@ -1,18 +1,23 @@
-// Create floating flowers
-const floatingFlowers = document.getElementById('floatingFlowers');
-const flowerImages = [
-    '🌸', '🌻', '🌼', '⭐','❤️','🦋','☘','🍁', '🌿'
-];
-
-for (let i = 0; i < 25; i++) {
+// Create background flowers
+const bgFlowers = document.getElementById('bgFlowers');
+for (let i = 0; i < 50; i++) {
     const flower = document.createElement('div');
     flower.classList.add('flower');
-    flower.innerHTML = flowerImages[Math.floor(Math.random() * flowerImages.length)];
     flower.style.left = `${Math.random() * 100}%`;
-    flower.style.fontSize = `${15 + Math.random() * 25}px`;
-    flower.style.animationDelay = `${Math.random() * 20}s`;
-    flower.style.animationDuration = `${15 + Math.random() *20}s`;
-    floatingFlowers.appendChild(flower);
+    flower.style.top = `${Math.random() * 100}%`;
+    flower.style.animationDelay = `${Math.random() * 15}s`;
+    flower.style.transform = `scale(${0.5 + Math.random()})`;
+    bgFlowers.appendChild(flower);
+}
+
+// Create garden border flowers
+const gardenBorder = document.getElementById('gardenBorder');
+for (let i = 0; i < 20; i++) {
+    const flower = document.createElement('div');
+    flower.classList.add('garden-flower');
+    flower.style.left = `${Math.random() * 100}%`;
+    flower.style.transform = `scale(${0.7 + Math.random() * 0.6})`;
+    gardenBorder.appendChild(flower);
 }
 
 // Scroll animations
@@ -50,32 +55,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 window.addEventListener('scroll', () => {
     const header = document.querySelector('header');
     if (window.scrollY > 100) {
-        header.style.background = 'rgba(10, 10, 10, 0.95)';
-        header.style.padding = '15px 0';
+        header.style.background = 'rgba(0, 0, 0, 0.9)';
     } else {
-        header.style.background = 'rgba(10, 10, 10, 0.85)';
-        header.style.padding = '20px 0';
+        header.style.background = 'rgba(0, 0, 0, 0.7)';
     }
-});
-
-// Add active class to current navigation link
-const sections = document.querySelectorAll('section');
-const navLinks = document.querySelectorAll('.nav-links a');
-
-window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (scrollY >= (sectionTop - 200)) {
-            current = section.getAttribute('id');
-        }
-    });
-
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').substring(1) === current) {
-            link.classList.add('active');
-        }
-    });
 });
